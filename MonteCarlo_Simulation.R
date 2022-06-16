@@ -17,23 +17,16 @@ covar_mat = as.matrix(cov(ret))
 
 mean = colMeans(ret)
 meanext = matrix(rep(mean, training_months), nrow = 11)
-
-#simulated portfolio
 p_retm = matrix(0, training_months, runs)
 
 
 
 set.seed(69420)
 for (i in 1:runs) {
-  ## [2] defines which dimension to take eg. [1] is x and [2] is y etc.
   Z = matrix ( rnorm( dim(ret)[2] * training_months ), ncol = training_months )
-  # Lower Triangular Matrix from our Choleski Factorization
   L = t( chol(covar_mat))
-  # Calculate stock returns for each month
   monthly_returns = meanext + L %*% Z
-  # Calculate portfolio returns for 180 months
   p_ret = cumprod( w %*% monthly_returns + 1 )
-  # Add it to the montecarlo matrix
   p_retm[,i] = p_ret;
 }
 
