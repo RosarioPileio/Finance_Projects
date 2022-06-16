@@ -1,5 +1,3 @@
-setwd("~/Library/CloudStorage/OneDrive-TheUniversityofManchester/R/Finance/BlackScholes")
-
 library(magrittr)
 library(ggplot2)
 library(tidyr)
