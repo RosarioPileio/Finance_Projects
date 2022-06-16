@@ -36,3 +36,6 @@ BlackScholes = function(St, K, r, t, vol, type) {
 
 df$value = BlackScholes(df$X.UNDERLYING_LAST.,df$X.STRIKE.,df$rf, df$Time_to_maturity,
                         ifelse(df$type == 'P', df$X.P_IV., df$X.C_IV.), df$type)
+
+df$value_difference = df$value - ifelse(type=='C', df$X.C_LAST., df$X.P_LAST.)
+df$valuation = ifelse(df$value_difference > 0, 'Undervalued', 'Overvalued')
